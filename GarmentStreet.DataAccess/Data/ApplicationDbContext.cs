@@ -1,9 +1,10 @@
 ﻿using GarmentStreet.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarmentStreet.DataAccess
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -15,6 +16,7 @@ namespace GarmentStreet.DataAccess
         public DbSet<Product> Products { get; set; }
         public DbSet<VariationOption> VariationOptions  { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
     }
 }

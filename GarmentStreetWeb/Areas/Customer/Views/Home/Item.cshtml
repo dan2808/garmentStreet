@@ -24,13 +24,17 @@
                     }
                 </select>
             </div>
+
             <div class="mb-3 col-6">
                 <label>Quantity</label>
                 <input class="form-control" />
             </div>
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary" style="width:150px">Add to Cart</button>
+            <div class="mb-3 col-6">
+                <button type="submit" class="btn btn-primary" >Add to Cart</button>
+                <a asp-controller="Home" asp-action="Products" asp-route-id=@Model.FirstOrDefault().Product.CategoryId class="btn btn-outline-primary" >
+                Back to Products
+            </a>
             </div>
         </form>
     </div>

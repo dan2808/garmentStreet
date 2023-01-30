@@ -39,7 +39,7 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
 
         public IActionResult Item(int id)
         {
-            IEnumerable<Inventory> inventoryList = _unitOfWork.Inventory.GetAllByProductId(id,"Product,VariationOption");
+            IEnumerable<Inventory> inventoryList = _unitOfWork.Inventory.GetAllByProductId(id, "Product,VariationOption");
             return View(inventoryList);
         }
 
