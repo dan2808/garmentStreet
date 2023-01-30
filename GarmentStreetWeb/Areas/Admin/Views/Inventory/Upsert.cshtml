@@ -1,0 +1,172 @@
+﻿@model GarmentStreet.Models.ViewModels.InventoryViewModel
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <input asp-for="Inventory.Id" hidden />
+
+    <div class="row">
+        <div class="col-8">
+            <div class="border p-3 mt-4 row">
+                <div class="col-12 pb-2">
+                    <h2 class="text-primary">@(Model.Inventory.Id!=0?"Update":"Create") Inventory Item</h2>
+                    <hr />
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="Inventory.Quantity"></label>
+                    <input asp-for="Inventory.Quantity" class="form-control" />
+                    <span asp-validation-for="Inventory.Quantity" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="Inventory.ProductId"></label>
+                    <select asp-for="Inventory.ProductId" asp-items="Model.ProductList" id="productDropdown" class="form-select">
+                        <option disabled selected>Please Select a Product </option>
+                    </select>
+                    <span asp-validation-for="Inventory.ProductId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label><b>Variation</b></label>
+                    <select class="form-select" id="variationDropdown">
+                        <option disabled selected>Please Select a Variation </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Inventory.VariationOptionId"></label>
+                    <select asp-for="Inventory.VariationOptionId" asp-items="Model.VariationOptionList" id="variationOptionDropdown" class="form-select">
+                        <option disabled selected>Please Select a Variation Option</option>
+                    </select>
+                    <span asp-validation-for="Inventory.VariationOptionId" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="mb-3">
+                    @if (Model.Inventory.Id != 0)
+                    {
+                        <button type="submit" class="btn btn-outline-primary" style="width:150px">Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" onclick="return ValidateInput()" class="btn btn-outline-primary" style="width:150px">Create</button>
+                    }
+                    <a asp-controller="Inventory" asp-action="Index" class="btn btn-outline-primary" style="width:200px">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        @*        <div class="col-4 pt-4">
+        <img id="preview" src="@Model.Inventory.Product.ImageUrl"
+        width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>*@
+    </div>
+
+
+
+</form>
+
+@section Scripts
+    {
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+
+        $(document).ready(function() {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/VariationOption/GetById?id="+@Model.Inventory.VariationOptionId, 
+                contentType: 'application/json',
+                dataType: "json",
+                success: function(data) {
+                    console.log(data.data.variation.name);
+                    $("#variationDropdown").html(`<option selected>${data.data.variation.name}</option>`);
+                }
+            });
+        });
+
+        const select = document.getElementById("productDropdown");
+
+
+        select.addEventListener("change", function() {
+            const selectedValue = select.value;
+            // Trigger your function here, passing in the selectedValue as an argument
+
+            getVariationList(selectedValue);
+        });
+
+        function getVariationList(value) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Product/GetById?id=" + value, // + document.querySelector('#productDropdown').value,
+                contentType: 'application/json',
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    console.log(data.data.category.id);
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Admin/Variation/GetAllByCategoryId?id=" + data.data.category.id, // + document.querySelector('#productDropdown').value,
+                        contentType: 'application/json',
+                        dataType: "json",
+                        success: function(data) {
+                            var s = '<option value="-1">Please Select a variation </option>';
+                            for (var i = 0; i < data.data.length; i++) {
+                                //console.log(data.data[i]);
+                                s += '<option value="' + data.data[i].id + '">' +  data.data[i].name + '</option>';
+                            }
+                            $("#variationDropdown").html(s);
+                        }
+                    })
+                }
+            });
+        }
+
+
+        const select2 = document.getElementById("variationDropdown");
+        select2.onchange = function() {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/VariationOption/GetAllByVariationId" + "?id=" + document.querySelector('#variationDropdown').value,
+                contentType: 'application/json',
+                dataType: "json",
+                success: function(data) {
+                    var s = '<option value="-1">Please Select a variation Option</option>';
+                    for (var i = 0; i < data.data.length; i++) {
+                        console.log(data.data[i]);
+                        s += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+                    }
+                    $("#variationOptionDropdown").html(s);
+                }
+            });
+        };
+
+
+        function getSelectionList() {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/VariationOption/GetAll", // + document.querySelector('#productDropdown').value,
+                contentType: 'application/json',
+                dataType: "json",
+                success: function(data) {
+                    var s = '<option value="-1">Please Select a </option>';
+                    for (var i = 0; i < data.data.length; i++) {
+                        //console.log(data.data[i]);
+                        s += '<option value="' + data.data[i].id + '">' + data.data[i].id + " - " + data.data[i].name + '</option>';
+                    }
+                    $("#variationOptionDropdown").html(s);
+
+                }
+            });
+        };
+
+
+    </script>
+    }

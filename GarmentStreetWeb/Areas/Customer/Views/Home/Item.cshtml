@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Inventory>
+
+<div class="row">
+    <div class="col-8 pt-4">
+        @*<div class="border p-3 mt-4 row">*@
+
+        <div class="col-12 pb-2">
+            <h2 class="text-primary">@(Model.FirstOrDefault().Product.Name)</h2>
+            <hr />
+        </div>
+        <div class="mb-3 col-12 pb-2">
+            <label class="pb-2">Description</label>
+            <div>@(Model.FirstOrDefault().Product.Description)</div>
+        </div>
+
+        <form method="post" class="row">
+            <div class="mb-3 col-6">
+                <label>Size</label>
+                <select class="form-select">
+                    <option disabled selected>Please Select a Size</option>
+                    @foreach (var inventory in Model)
+                    {
+                        <option value="@inventory.VariationOptionId">@inventory.VariationOption.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3 col-6">
+                <label>Quantity</label>
+                <input class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-outline-primary" style="width:150px">Add to Cart</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-4 pt-4">
+        <img id="preview" src="@Model.FirstOrDefault().Product.ImageUrl"
+             width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+    </div>
+
+
+</div>

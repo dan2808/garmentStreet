@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Target>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6 ">
+            <h2 class="text-primary"> Target List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Target" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Create New Target
+            </a>
+        </div>
+
+    </div>
+
+    <br />
+
+    <table class="table table-hover table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Target Name
+                </th>
+
+                <th>
+                    Created Time and Date
+                </th>
+                <th>
+
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="40%">
+                        @obj.Name
+                    </td>
+                    <td width="40%">
+                        @obj.CreatedDateTime
+                    </td>
+                    <th>
+                        <div class="row">
+                            <div class="col-6 d-flex justify-content-center">
+                                <a asp-controller="Target" asp-action="Edit" asp-route-id="@obj.Id" class="btn">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="col-6 d-flex justify-content-center">
+                                <a onClick="Delete('/Admin/Target/Delete?id=@obj.Id')" class="btn"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/target.js"></script>
+
+}

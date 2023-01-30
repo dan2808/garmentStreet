@@ -1,0 +1,36 @@
+﻿<h1>Test View</h1>
+
+<div>
+    @*    <select id="targets" name="mySelect">
+    <option>Pick your option</option>
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+    </select>
+    <div id="option"> </div>*@
+
+
+    @*    <select id="targets" name="myTargets">
+    <option>Pick your target</option>
+    </select>
+
+    <select id="categories" name="myCategories">
+    <option>Pick your target</option>
+    </select>*@
+
+
+    <form id="myForm">
+        <label for="categoryDropdown"><b>Category</b></label>
+        <select class="form-control" id="categoryDropdown" name="categoryDropdown"></select>
+
+        <label for="variationDropdown"><b>Variations</b></label>
+        <select class="form-control" id="variationDropdown" name="variationDropdown"></select>
+    </form>
+
+</div>
+
+
+
+@section Scripts{
+    <script src="~/js/test.js"></script>
+}

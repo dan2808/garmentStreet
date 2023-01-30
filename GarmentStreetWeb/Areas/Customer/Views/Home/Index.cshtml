@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Target>
+
+<div class="row pb-3">
+    @foreach (var target in Model)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card rounded">
+                        <img src="@target.ImageUrl" class="card-img-top rounded-top" style="border:none" />
+                        <div class="card-body">
+                            @*<h5 class="card-title">@target.Name</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                            <a asp-controller="Home" asp-action="Categories" asp-route-id="@target.Id" class="btn btn-primary">@target.Name</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+
+</div>

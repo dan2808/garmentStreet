@@ -1,0 +1,44 @@
+﻿@model GarmentStreet.Models.ViewModels.VariationOptionViewModel
+
+<form method="post" asp-action="Upsert">
+    <input asp-for="VariationOption.Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">@(Model.VariationOption.Id!=0?"Update":"Create") Variation Option</h2>
+            <hr />
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="VariationOption.Name"></label>
+            <input asp-for="VariationOption.Name" class="form-control" />
+            <span asp-validation-for="VariationOption.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="VariationOption.VariationId"></label>
+            <select asp-for="VariationOption.VariationId" asp-items="Model.VariationList" class="form-select">
+                <option disabled selected>--Select Category--</option>
+            </select>
+            <span asp-validation-for="VariationOption.VariationId" class="text-danger"></span>
+        </div>
+        @if(Model.VariationOption.Id!=0)
+        {
+            <button type="submit" class="btn btn-outline-primary" style="width:150px">Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-outline-primary" style="width:150px">Create</button>
+        }
+        <a asp-controller="VariationOption" asp-action="Index" class="btn btn-outline-primary" style="width:200px">
+            Back to List
+        </a>
+
+    </div>
+
+</form>
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

@@ -1,0 +1,83 @@
+﻿@model Target
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<form method="post" enctype="multipart/form-data">
+        
+    <input asp-for="ImageUrl" hidden />
+
+
+
+    <div class="row">
+        <div class="col-8">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+                    <h2 class="text-primary">Create Target</h2>
+                    <hr />
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ImageUrl"></label>
+                    <input type="file" id="uploadBox" name="file" asp-for="ImageUrl" class="form-control" onchange="readURL(this);" />
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary" style="width:150px">Create</button>
+                <a asp-controller="Target" asp-action="Index" class="btn btn-outline-primary" style="width:200px">
+                    Back to List
+                </a>
+            </div>
+        </div>
+
+        <div class="col-4 pt-4">
+            <img id="preview" src=""
+                 width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
+        </div>
+
+
+    </div>
+
+</form>
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        function ValidateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please Upload an image!'
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    }
+
+
