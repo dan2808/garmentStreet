@@ -14,6 +14,8 @@ namespace GarmentStreet.DataAccess.Repository.IRepository
         IVariationOptionRepository VariationOption { get; }
         IProductRepository Product { get; }
         IInventoryRepository Inventory { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
 
         public void Save();
     }

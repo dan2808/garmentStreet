@@ -17,6 +17,7 @@ namespace GarmentStreet.DataAccess
         public DbSet<VariationOption> VariationOptions  { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
     }
 }

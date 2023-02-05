@@ -15,7 +15,7 @@
 <body>
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">GarmentStreet</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,24 +37,29 @@
                             <a class="nav-link" href="#">About</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Management</a>
+                            <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Content Management</a>
                             <div class="dropdown-menu">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Target" asp-action="Index">Target</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Variation" asp-action="Index">Variation</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="VariationOption" asp-action="Index">Variation Option</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
-                                <a class="nav-link" asp-area="Admin" asp-controller="Inventory" asp-action="Index">Inventory</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="Target" asp-action="Index">Target</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="Variation" asp-action="Index">Variation</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="VariationOption" asp-action="Index">Variation Option</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                <a class="nav-link dropdown-item" asp-area="Admin" asp-controller="Inventory" asp-action="Index">Inventory</a>
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-bag"></i>
+                            </a>
+                        </li>
                     </ul>
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                     @*<form class="d-flex">
-                        <input class="form-control me-sm-2" type="search" placeholder="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control me-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>*@
                 </div>
             </div>

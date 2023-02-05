@@ -1,47 +1,63 @@
-﻿@model IEnumerable<Inventory>
+﻿@model GarmentStreet.Models.ViewModels.ShoppingCartViewModel
+
+@*check if Model is null => redirect to the previous page*@
 
 <div class="row">
     <div class="col-8 pt-4">
         @*<div class="border p-3 mt-4 row">*@
 
         <div class="col-12 pb-2">
-            <h2 class="text-primary">@(Model.FirstOrDefault().Product.Name)</h2>
+            <h2 class="text-primary">@(Model.Product.Name)</h2>
             <hr />
         </div>
         <div class="mb-3 col-12 pb-2">
             <label class="pb-2">Description</label>
-            <div>@(Model.FirstOrDefault().Product.Description)</div>
+            <div>@(Model.Product.Description)</div>
         </div>
 
-        <form method="post" class="row">
+        <div class="mb-3 col-12 pb-2">
+            <label class="pb-2">Price</label>
+            <div>@Model.Product.Price.ToString("c")</div>
+        </div>
+
+        <form method="post" asp-action="Item" class="row">
+            @*<input type="hidden" name="id" value="@(Model.Product.CategoryId)">*@
+            <input type="hidden" asp-for="Product.CategoryId" />
+            <input asp-for="ShoppingCart.Id" hidden />
             <div class="mb-3 col-6">
-                <label>Size</label>
-                <select class="form-select">
+                <label asp-for="ShoppingCart.InventoryId"></label>
+                <select asp-for="ShoppingCart.InventoryId" asp-items="Model.InventoryList" class="form-select">
                     <option disabled selected>Please Select a Size</option>
-                    @foreach (var inventory in Model)
-                    {
-                        <option value="@inventory.VariationOptionId">@inventory.VariationOption.Name</option>
-                    }
                 </select>
+                <span asp-validation-for="ShoppingCart.InventoryId" class="text-danger"></span>
             </div>
 
             <div class="mb-3 col-6">
-                <label>Quantity</label>
-                <input class="form-control" />
+                <label asp-for="ShoppingCart.Quatity"></label>
+                <input asp-for="ShoppingCart.Quatity" class="form-control" />
+                <span asp-validation-for="ShoppingCart.Quatity" class="text-danger"></span>
             </div>
 
             <div class="mb-3 col-6">
-                <button type="submit" class="btn btn-primary" >Add to Cart</button>
-                <a asp-controller="Home" asp-action="Products" asp-route-id=@Model.FirstOrDefault().Product.CategoryId class="btn btn-outline-primary" >
-                Back to Products
-            </a>
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                <a asp-controller="Home" asp-action="Products" asp-route-id=@Model.Product.CategoryId class="btn btn-outline-primary">
+                    Back to Products
+                </a>
             </div>
         </form>
     </div>
 
     <div class="col-4 pt-4">
-        <img id="preview" src="@Model.FirstOrDefault().Product.ImageUrl"
+        <img id="preview" src="@Model.Product.ImageUrl"
              width="100%" style="border-radius:5px; border:1px solid #bbb9b9" />
     </div>
 
 </div>
+
+
+@section Scripts
+    {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }

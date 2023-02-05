@@ -19,14 +19,18 @@ namespace GarmentStreet.DataAccess.Repository
             VariationOption = new VariationOptionRepository(_db);
             Product = new ProductRepository(_db);
             Inventory = new InventoryRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
         public ITargetRepository Target { get; private set; }
         public ICategoryRepository Category { get; private set; }
         public IVariationRepository Variation { get; private set; }
         public IVariationOptionRepository VariationOption { get; private set; }
         public IProductRepository Product { get; private set; }
-
         public IInventoryRepository Inventory { get; private set; }
+
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
 
 
 
