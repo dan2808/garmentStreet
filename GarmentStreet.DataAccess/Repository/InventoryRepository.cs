@@ -33,26 +33,26 @@ namespace GarmentStreet.DataAccess.Repository
             }
         }
 
-        public IEnumerable<Variation> FindVariationByCategoryId(int id)
-        {
-            IEnumerable<Variation> listVariation = _db.Variations.Where(c => c.CategoryId == id);
+        //public IEnumerable<Variation> FindVariationByCategoryId(int id)
+        //{
+        //    IEnumerable<Variation> listVariation = _db.Variations.Where(c => c.CategoryId == id);
 
-            return listVariation;
-        }
+        //    return listVariation;
+        //}
 
-        public IEnumerable<Inventory> GetAllByProductId(int id, string? includeProperties = null)
-        {
-            IQueryable<Inventory> query = _db.Inventories.Where(x => x.ProductId == id);
-            if (includeProperties != null)
-            {
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProp);
+        //public IEnumerable<Inventory> GetAllByProductId(int id, string? includeProperties = null)
+        //{
+        //    IQueryable<Inventory> query = _db.Inventories.Where(x => x.ProductId == id);
+        //    if (includeProperties != null)
+        //    {
+        //        foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+        //        {
+        //            query = query.Include(includeProp);
 
-                }
-            }
-            return query.ToList();
+        //        }
+        //    }
+        //    return query.ToList();
 
-        }
+        //}
     }
 }

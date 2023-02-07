@@ -16,10 +16,10 @@ namespace GarmentStreet.DataAccess.Repository
             _db = db;
         }
 
-        public IEnumerable<Product> GetAllByCategoryId(int id)
-        {
-            return _db.Products.Where(x => x.CategoryId == id).ToList();
-        }
+        //public IEnumerable<Product> GetAllByCategoryId(int id)
+        //{
+        //    return _db.Products.Where(x => x.CategoryId == id).ToList();
+        //}
 
         public void Update(Product obj)
         {

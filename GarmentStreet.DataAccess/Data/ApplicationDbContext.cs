@@ -18,6 +18,10 @@ namespace GarmentStreet.DataAccess
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+
 
     }
 }

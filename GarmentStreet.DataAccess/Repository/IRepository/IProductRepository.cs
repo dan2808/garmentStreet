@@ -11,7 +11,7 @@ namespace GarmentStreet.DataAccess.Repository.IRepository
     {
         void Update(Product product);
 
-        IEnumerable<Product> GetAllByCategoryId(int id);
+        //IEnumerable<Product> GetAllByCategoryId(int id);
 
 
     }

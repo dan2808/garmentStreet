@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GarmentStreet.DataAccess.Repository.IRepository
 {
-    public interface IInventoryRepository : IRepository<Inventory>
+    public interface IOrderDetailRepository : IRepository<OrderDetail>
     {
-        void Update(Inventory inventory);
+        void Update(OrderDetail orderDetail);
 
-        //IEnumerable<Inventory> GetAllByProductId(int id, string? includeProperties = null);
+        //IEnumerable<Category> GetAllByTargetId(int id);
 
 
     }

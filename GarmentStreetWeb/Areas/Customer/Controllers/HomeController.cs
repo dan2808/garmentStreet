@@ -29,14 +29,14 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
 
         public IActionResult Categories(int id)
         {
-            IEnumerable<Category> categoryList = _unitOfWork.Category.GetAllByTargetId(id);
+            IEnumerable<Category> categoryList = _unitOfWork.Category.GetAll(x => x.TargetId == id);
             return View(categoryList);
         }
 
 
         public IActionResult Products(int id)
         {
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAllByCategoryId(id);
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(x => x.CategoryId == id);
             return View(productList);
         }
 
@@ -47,7 +47,7 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
                 ShoppingCart = new()
                 { Quatity = 1},
                 Product = _unitOfWork.Product.GetFirstOrDefault(u=>u.Id == id),
-                InventoryList = _unitOfWork.Inventory.GetAllByProductId(id, "Product,VariationOption").Select(
+                InventoryList = _unitOfWork.Inventory.GetAll(x => x.ProductId == id, "Product,VariationOption").Select(
                 u => new SelectListItem
                 {
                     Text = u.VariationOption.Name,
