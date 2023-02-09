@@ -104,7 +104,11 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
             //Stripe Settings
             var domain = "https://localhost:44374/";
             var options = new SessionCreateOptions
-            {
+            {   
+                PaymentMethodTypes = new List<string>
+                {
+                    "card",
+                },
                 LineItems = new List<SessionLineItemOptions>(),
                 Mode = "payment",
                 SuccessUrl = domain+$"customer/cart/OrderConfirmation?id={ShoppingCartItemsVM.OrderHeader.Id}",
@@ -131,7 +135,7 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
 
             var service = new SessionService();
             Session session = service.Create(options);
-            _unitOfWork.OrderHeader.UpdateStripePaymentId(ShoppingCartItemsVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+            _unitOfWork.OrderHeader.UpdateStripeSessionId(ShoppingCartItemsVM.OrderHeader.Id, session.Id);
             _unitOfWork.Save();
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
@@ -151,6 +155,7 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
             //check the stripe status
             if(session.PaymentStatus.ToLower()=="paid")
             {
+                _unitOfWork.OrderHeader.UpdateStripePaymentIntentId(id, session.PaymentIntentId);
                 _unitOfWork.OrderHeader.UpdateStatus(id,SD.StatusApproved,SD.PaymentStatusApproved);
                 _unitOfWork.Save();
             }

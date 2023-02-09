@@ -36,12 +36,19 @@ namespace GarmentStreet.DataAccess.Repository
             }
         }
 
-        public void UpdateStripePaymentId(int id, string sessionId, string paymentIndentId)
+        public void UpdateStripeSessionId(int id, string sessionId)
         {
             var orderFromDb = _db.OrderHeaders.FirstOrDefault(x => x.Id == id);
-
+            orderFromDb.OrderDate = DateTime.Now;
             orderFromDb.SessionId = sessionId;
-            orderFromDb.PaymentIntentId = paymentIndentId;
+            
+        }
+
+        public void UpdateStripePaymentIntentId(int id, string intentId)
+        {
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(x => x.Id == id);
+            orderFromDb.PaymentIntentId = intentId;
+
         }
 
     }
