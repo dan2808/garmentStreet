@@ -1,5 +1,6 @@
 ﻿using GarmentStreet.DataAccess.Repository.IRepository;
 using GarmentStreet.Models;
+using GarmentStreet.Utility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GarmentStreetWeb.Areas.Admin.Controllers
@@ -12,8 +13,12 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var id = 1;
+            var orderHeaderFromDb = _unitOfWork.OrderHeader.GetFirstOrDefault(x => x.Id == id, includeProperties: "ApplicationUser");
+
+            
             return View();
         }
 

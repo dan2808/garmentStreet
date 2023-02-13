@@ -3,12 +3,15 @@ using GarmentStreet.DataAccess;
 using GarmentStreet.DataAccess.Repository.IRepository;
 using GarmentStreet.Models;
 using GarmentStreet.Models.ViewModels;
+using GarmentStreet.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GarmentStreetWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

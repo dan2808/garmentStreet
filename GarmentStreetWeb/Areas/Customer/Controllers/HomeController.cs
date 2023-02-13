@@ -1,6 +1,7 @@
 ﻿using GarmentStreet.DataAccess.Repository.IRepository;
 using GarmentStreet.Models;
 using GarmentStreet.Models.ViewModels;
+using GarmentStreet.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -71,14 +72,30 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
             if(cartFromDb == null)
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCartViewModel.ShoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                    _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).Sum(x => x.Quatity));
+
+
+                //for quantity not just product type
+                //int quantity = 0;
+                //foreach (var item in _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).ToList())
+                //{
+                //    quantity += item.Quatity;
+                //}
+                //HttpContext.Session.SetInt32(SD.SessionCart, quantity);
+
 
             }
             else
             {
                 _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCartViewModel.ShoppingCart.Quatity);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart,
+                    _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).Sum(x => x.Quatity));
             }
 
-            _unitOfWork.Save();
+
 
             return RedirectToAction(nameof(Products),new { id = shoppingCartViewModel.Product.CategoryId });
         }

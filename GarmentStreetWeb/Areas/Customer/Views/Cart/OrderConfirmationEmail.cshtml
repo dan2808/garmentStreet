@@ -1,0 +1,29 @@
+﻿@model GarmentStreet.Models.ViewModels.OrderConfirmationEmailViewModel
+@{
+    Layout = null;  // explicitly no layout page here!
+
+
+}
+
+<div>
+    <h1>Hello @Model.Name!</h1>
+    <p>Thank you for your order with us. Your order number is @Model.OrderNumber.</p>
+    <p>Your order details:</p>
+    @foreach (var item in Model.OrderDetails)
+    {
+        <li class="list-group-item d-flex justify-content-between p-2">
+            <div class="row container">
+                <div class="col-8">
+                    <h6 class="my-0 text-primary">@item.Inventory.Product.Name</h6>
+                    <small class="text-muted">Price : @item.Price.ToString("c")</small><br />
+                    <small class="text-muted">Quantity : @item.Quantity</small>
+                </div>
+                <div class="col-4 text-end">
+                    <p class="text-success">@((item.Quantity*item.Price).ToString("c")) </p>
+                </div>
+            </div>
+        </li>
+    }
+    <p>Total cost: @Model.OrderTotal</p>
+    <p>We'll be in touch soon!</p>
+</div>

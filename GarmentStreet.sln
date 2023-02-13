@@ -5,11 +5,11 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarmentStreetWeb", "GarmentStreetWeb\GarmentStreetWeb.csproj", "{CEF49C33-F283-47C5-9EA3-81FD6BBADDAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarmentStreet.DataAccess", "GarmentStreet.DataAccess\GarmentStreet.DataAccess.csproj", "{43406394-6C13-4190-A15E-35B796B73280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarmentStreet.DataAccess", "GarmentStreet.DataAccess\GarmentStreet.DataAccess.csproj", "{43406394-6C13-4190-A15E-35B796B73280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarmentStreet.Models", "GarmentStreet.Models\GarmentStreet.Models.csproj", "{234B6D3A-0018-4FA6-8E16-F2C438DC90FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarmentStreet.Models", "GarmentStreet.Models\GarmentStreet.Models.csproj", "{234B6D3A-0018-4FA6-8E16-F2C438DC90FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarmentStreet.Utility", "GarmentStreet.Utility\GarmentStreet.Utility.csproj", "{FEDAE03E-B85E-44B0-B01F-5481157CF8F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GarmentStreet.Utility", "GarmentStreet.Utility\GarmentStreet.Utility.csproj", "{FEDAE03E-B85E-44B0-B01F-5481157CF8F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
