@@ -26,5 +26,10 @@ namespace GarmentStreet.Utility
 
         public const string SessionCart = "SessionShoppingCart";
 
+        public const string EmailSenderRegistration = "registration";
+        public const string EmailSenderOrders = "orders";
+
+
+
     }
 }

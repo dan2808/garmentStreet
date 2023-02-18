@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GarmentStreet.Models\GarmentStreet.Models.csproj" />
+    <ProjectReference Include="..\GarmentStreet.Utility\GarmentStreet.Utility.csproj" />
   </ItemGroup>
 
 </Project>

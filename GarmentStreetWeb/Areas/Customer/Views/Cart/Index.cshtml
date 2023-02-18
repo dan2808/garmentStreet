@@ -71,9 +71,12 @@
 
             <div class="card-footer">
                 <div class="row">
+                    @if(Model.ListCart.Count()>0)
+                    {
                     <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
                         <a asp-action="Summary" class="btn btn-dark form-control">Summary</a>
                     </div>
+                    }
                 </div>
             </div>
         </div>

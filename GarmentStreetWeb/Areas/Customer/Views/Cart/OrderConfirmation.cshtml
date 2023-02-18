@@ -1,15 +1,23 @@
 ﻿@model int
 
 <div class="container row">
-    <div class="col-12 text-center">
-        <h1 class="text-primary text-center">Order Placed Successfully!</h1>
-        Your Order Number is : @Model <br /><br />
-        <img src="~/images/lawn_leaf.jpg" width="65%" />
-    </div>
-    <div class="col-12 text-center" style="color:maroon">
-        <br />
-        Your order has been placed successfully! <br />
+    <div class="col-12 text-center py-2">
+        <h2 class="text-center py-4">Your Order has been received</h2>
+         <br />
+         <h1 class="text-center py-2"><i class="bi bi-check-circle"></i></h1>
         
+
+        Your Order ID is @Model <br /><br />
+
     </div>
-</div> 
+    <div class="col-12 text-center">
+        <br />
+        You will receive an order confirmation email with details of your order. <br /><br />
+
+    </div>
+    <div class="col-12 text-center py-2">
+        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-dark">Continue Shopping</a>
+    </div>
+
+</div>
 

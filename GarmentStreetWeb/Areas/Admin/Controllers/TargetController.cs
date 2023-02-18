@@ -65,7 +65,7 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
 
                     _unitOfWork.Target.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Target created successfully";
+                TempData["Success"] = "Target created successfully";
                 return RedirectToAction("Index", "Target");
             }
 

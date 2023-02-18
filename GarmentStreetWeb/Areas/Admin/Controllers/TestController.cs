@@ -13,7 +13,7 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var id = 1;
             var orderHeaderFromDb = _unitOfWork.OrderHeader.GetFirstOrDefault(x => x.Id == id, includeProperties: "ApplicationUser");

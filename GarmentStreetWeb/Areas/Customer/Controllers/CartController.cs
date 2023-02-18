@@ -112,7 +112,10 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
 
             }
             //Stripe Settings
-            var domain = "https://localhost:44374/";
+            var domainStatic =  "https://localhost:44374/";
+            
+            
+            var domain = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}/";
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string>
@@ -171,8 +174,8 @@ namespace GarmentStreetWeb.Areas.Customer.Controllers
             }
 
 
-            var model = new OrderConfirmationEmailViewModel() { Name = orderHeaderFromDb.ApplicationUser.Name, OrderNumber = orderHeaderFromDb.Id, OrderTotal = orderHeaderFromDb.OrderTotal , 
-                OrderDetails = _unitOfWork.OrderDetail.GetAll(x=>x.OrderId == id,includeProperties:"Inventory.Product")};
+            var model = new OrderConfirmationEmailViewModel() { OrderHeader= orderHeaderFromDb , 
+                OrderDetails = _unitOfWork.OrderDetail.GetAll(x=>x.OrderId == id,includeProperties:"Inventory.Product,Inventory.VariationOption")};
             var result = await RenderView.RenderPageToStringAsync("OrderConfirmationEmail", model, this.ControllerContext);
 
             _emailSender.SendEmailAsync(orderHeaderFromDb.ApplicationUser.Email, "New Order - GarmentStreet", result);

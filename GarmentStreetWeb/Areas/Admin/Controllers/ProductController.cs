@@ -33,10 +33,10 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
             ProductViewModel productVM = new()
             {
                 Product = new(),
-                CategoryList = _unitOfWork.Category.GetAll().Select(
+                CategoryList = _unitOfWork.Category.GetAll(includeProperties:"Target").Select(
                 u => new SelectListItem
                 {
-                    Text = u.Name,
+                    Text = u.Name+"-"+u.Target.Name,
                     Value = u.Id.ToString()
                 })
             };
@@ -101,7 +101,7 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
                 {
                     _unitOfWork.Product.Add(obj.Product);
                     _unitOfWork.Save();
-                    TempData["success"] = "Product created successfully";
+                    TempData["Success"] = "Product created successfully";
                     return RedirectToAction("Index", "Product");
 
 
@@ -110,7 +110,7 @@ namespace GarmentStreetWeb.Areas.Admin.Controllers
                 {
                     _unitOfWork.Product.Update(obj.Product);
                     _unitOfWork.Save();
-                    TempData["success"] = "Product updated successfully";
+                    TempData["Success"] = "Product updated successfully";
                     return RedirectToAction("Index", "Product");
                 }
 

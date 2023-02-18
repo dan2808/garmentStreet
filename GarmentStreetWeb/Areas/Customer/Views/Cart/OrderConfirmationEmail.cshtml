@@ -1,11 +1,12 @@
 ﻿@model GarmentStreet.Models.ViewModels.OrderConfirmationEmailViewModel
+@inject IUrlHelper Url
 @{
     Layout = null;  // explicitly no layout page here!
-
+    string domain = $"{Context.Request.Scheme}://{Context.Request.Host}";
 
 }
 
-<div>
+@*<div>
     <h1>Hello @Model.Name!</h1>
     <p>Thank you for your order with us. Your order number is @Model.OrderNumber.</p>
     <p>Your order details:</p>
@@ -26,4 +27,233 @@
     }
     <p>Total cost: @Model.OrderTotal</p>
     <p>We'll be in touch soon!</p>
-</div>
+</div>*@
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Email Template for Order Confirmation Email</title>
+
+    <!-- Start Common CSS -->
+    <style type="text/css">
+        #outlook a {
+            padding: 0;
+        }
+
+        body {
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, arial, sans-serif;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+
+            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+                line-height: 100%;
+            }
+
+        .backgroundTable {
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+            line-height: 100% !important;
+        }
+
+        .main-temp table {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            font-family: Helvetica, arial, sans-serif;
+        }
+
+            .main-temp table td {
+                border-collapse: collapse;
+            }
+    </style>
+    <!-- End Common CSS -->
+</head>
+<body>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" class="backgroundTable main-temp" style="background-color: #d5d5d5;">
+        <tbody>
+            <tr>
+                <td>
+                    <table width="600" align="center" cellpadding="15" cellspacing="0" border="0" class="devicewidth" style="background-color: #ffffff;">
+                        <tbody>
+                            <!-- Start header Section -->
+                            <tr>
+                                <td style="padding-top: 30px;">
+                                    <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner" style="border-bottom: 1px solid #eeeeee; text-align: center;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-bottom: 10px;">
+                                                    <h1 href=@domain>GarmentStreet</h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 18px; color: #666666;">
+                                                    Calea Independentei nr. 22
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 18px; color: #666666;">
+                                                    Alexandria, Teleorman, 140001
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 18px; color: #666666;">
+                                                    Phone: 145-100-6672 | Email: orders@garmentstreet.com
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 14px; line-height: 18px; color: #666666; padding-bottom: 25px;">
+                                                    <strong>Order Number:</strong> @Model.OrderHeader.Id | <strong>Order Date:</strong> @Model.OrderHeader.OrderDate
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- End header Section -->
+                            <!-- Start address Section -->
+                            <tr>
+                                <td style="padding-top: 0;">
+                                    <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner" style="border-bottom: 1px solid #bbbbbb;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 55%; font-size: 16px; font-weight: bold; color: #666666; padding-bottom: 5px;">
+                                                    Delivery Address
+                                                </td>
+                                                <td style="width: 45%; font-size: 16px; font-weight: bold; color: #666666; padding-bottom: 5px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 55%; font-size: 14px; line-height: 18px; color: #666666;">
+                                                    @Model.OrderHeader.ApplicationUser.Name
+                                                </td>
+                                                <td style="width: 45%; font-size: 14px; line-height: 18px; color: #666666;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 55%; font-size: 14px; line-height: 18px; color: #666666;">
+                                                    @Model.OrderHeader.StreetAddress, @Model.OrderHeader.City
+                                                </td>
+                                                <td style="width: 45%; font-size: 14px; line-height: 18px; color: #666666;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 55%; font-size: 14px; line-height: 18px; color: #666666; padding-bottom: 10px;">
+                                                    @Model.OrderHeader.State, @Model.OrderHeader.PostalCode
+                                                </td>
+                                                <td style="width: 45%; font-size: 14px; line-height: 18px; color: #666666; padding-bottom: 10px;">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- End address Section -->
+                            <!-- Start product Section -->
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+
+                                    <td style="padding-top: 0;">
+                                        <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner" style="border-bottom: 1px solid #eeeeee;">
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="4" style="padding-right: 10px; padding-bottom: 10px;">
+                                                        @{
+                                                            var imageUrl = Url.Content($"~{item.Inventory.Product.ImageUrl.Replace('\\', '/')}");
+                                                            var fullImageUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{imageUrl}";
+                                                        }
+                                                        <img style="height: 80px;" src="@fullImageUrl" alt="Product Image" />
+                                                    </td>
+                                                    <td colspan="2" style="font-size: 14px; font-weight: bold; color: #666666; padding-bottom: 5px;">
+                                                        @item.Inventory.Product.Name
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 14px; line-height: 18px; color: #757575; width: 440px;">
+                                                    </td>
+                                                    <td style="width: 130px;"></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 14px; line-height: 18px; color: #757575;">
+                                                        Quantity: @item.Quantity
+                                                    </td>
+                                                    <td style="font-size: 14px; line-height: 18px; color: #757575; text-align: right;">
+                                                        @((item.Price).ToString("c")) per Unit
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 14px; line-height: 18px; color: #757575; padding-bottom: 10px;">
+                                                        Size: @item.Inventory.VariationOption.Name
+                                                    </td>
+                                                    <td style="font-size: 14px; line-height: 18px; color: #757575; text-align: right; padding-bottom: 10px;">
+                                                        <b style="color: #666666;">@((item.Quantity*item.Price).ToString("c"))</b> Subtotal
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                </tr>
+                            }
+
+                            <!-- End product Section -->
+                            <!-- Start calculation Section -->
+                            <tr>
+                                <td style="padding-top: 0;">
+                                    <table width="560" align="center" cellpadding="0" cellspacing="0" border="0" class="devicewidthinner" style="border-bottom: 1px solid #bbbbbb; margin-top: -5px;">
+                                        <tbody>
+
+
+                                            <tr>
+                                                <td style="font-size: 14px; font-weight: bold; line-height: 18px; color: #666666; padding-top: 10px;">
+                                                    Order Total
+                                                </td>
+                                                <td style="font-size: 14px; font-weight: bold; line-height: 18px; color: #666666; padding-top: 10px; text-align: right;">
+                                                    @Model.OrderHeader.OrderTotal.ToString("c")
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- End calculation Section -->
+                            <!-- Start payment method Section -->
+                            <tr>
+                                <td align="left" bgcolor="#ffffff">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td align="center" bgcolor="#ffffff" style="padding: 12px;">
+                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td align="center" bgcolor="#050505" style="border-radius: 6px;">
+                                                            <a href=@(domain+"/Admin/Order") target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Orders</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- End payment method Section -->
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+
+
